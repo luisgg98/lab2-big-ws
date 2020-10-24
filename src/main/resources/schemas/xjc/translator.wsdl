@@ -27,19 +27,12 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-
         </xs:schema>
     </wsdl20:types>
-    <wsdl20:message name="messageRequest">
-        <wsdl:part name="parameters" element="translator:getTranslationRequest" />
-    </wsdl20:message>
-    <wsdl20:message name="messageResponse">
-        <wsdl20:part name="parameters" element="translator:getTranslationResponse" />
-    </wsdl20:message>
     <wsdl20:interface name="TranslatorPortType">
         <wsdl20:operation name="translate">
-            <wsdl20:input message="translator:messageRequest" />
-            <wsdl20:output message="translator:messageResponse" />
+            <wsdl20:input element="translator:getTranslationRequest" />
+            <wsdl20:output element="translator:getTranslationResponse" />
         </wsdl20:operation>
     </wsdl20:interface>
     <wsdl20:binding name="TranslatorSoap12Binding" type="translator:TranslatorPortType">
