@@ -36,7 +36,7 @@ public class TranslatorEndpointTest {
     marshaller.afterPropertiesSet();
   }
 
-  @Test
+  @Test(expected = RuntimeException.class)
   public void testSendAndReceive() {
     GetTranslationRequest request = new GetTranslationRequest();
     request.setLangFrom("en");
@@ -49,4 +49,21 @@ public class TranslatorEndpointTest {
     GetTranslationResponse translation = (GetTranslationResponse) response;
     assertThat(translation.getTranslation(), is("I don't know how to translate from en to es the text 'This is a test of translation service'"));
   }
+
+  //https://docs.spring.io/spring-ws/site/spring-ws-core/apidocs/org/springframework/ws/class-use/WebServiceException.html
+  // Cualquier excepcion que se produzca en el lado del cliente
+  @Test(expected = org.springframework.ws.client.WebServiceTransportException.class)
+  public void testTransportFail() {
+    GetTranslationRequest request = new GetTranslationRequest();
+    request.setLangFrom("en");
+    request.setLangTo("es");
+    request.setText("This is a test of translation service");
+    Object response = new WebServiceTemplate(marshaller).marshalSendAndReceive("http://localhost:"
+            + port + "/no_think_therefore_no_exist", request);
+    assertNotNull(response);
+    assertThat(response, instanceOf(GetTranslationResponse.class));
+    GetTranslationResponse translation = (GetTranslationResponse) response;
+    assertThat(translation.getTranslation(), is("I don't know how to translate from en to es the text 'This is a test of translation service'"));
+  }
 }
+

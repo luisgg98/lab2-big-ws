@@ -18,7 +18,8 @@ xjcGeneration {
     }
 }
 
-sourceSets.main.java.srcDirs += "${buildDir}/generated-sources/xjc"
+/** Puede que este codigo de problemas, consultar profespr***/
+/*sourceSets.main.java.srcDirs += "${buildDir}/generated-sources/xjc"**/
 compileJava.dependsOn "xjcGeneration"
 
 dependencies {
