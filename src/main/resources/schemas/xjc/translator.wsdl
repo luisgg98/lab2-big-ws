@@ -1,10 +1,10 @@
-<wsdl:definitions xmlns:wsdl="http://www.w3.org/ns/wsdl"
+<wsdl20:descriptions xmlns:wsdl20="http://www.w3.org/ns/wsdl"
                   xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
                   xmlns:translator="http://translator/web/ws/schema"
                   xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
                   targetNamespace="http://translator/web/ws/schema">
-    <wsdl:types>
+    <wsdl20:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    targetNamespace="http://translator/web/ws/schema" elementFormDefault="qualified">
 
@@ -29,29 +29,29 @@
             </xs:element>
 
         </xs:schema>
-    </wsdl:types>
-    <wsdl:message name="messageRequest">
+    </wsdl20:types>
+    <wsdl20:message name="messageRequest">
         <wsdl:part name="parameters" element="translator:getTranslationRequest" />
-    </wsdl:message>
-    <wsdl:message name="messageResponse">
-        <wsdl:part name="parameters" element="translator:getTranslationResponse" />
-    </wsdl:message>
-    <wsdl:portType name="TranslatorPortType">
-        <wsdl:operation name="translate">
-            <wsdl:input message="translator:messageRequest" />
-            <wsdl:output message="translator:messageResponse" />
-        </wsdl:operation>
-    </wsdl:portType>
-    <wsdl:binding name="TranslatorSoap12Binding" type="translator:TranslatorPortType">
+    </wsdl20:message>
+    <wsdl20:message name="messageResponse">
+        <wsdl20:part name="parameters" element="translator:getTranslationResponse" />
+    </wsdl20:message>
+    <wsdl20:interface name="TranslatorPortType">
+        <wsdl20:operation name="translate">
+            <wsdl20:input message="translator:messageRequest" />
+            <wsdl20:output message="translator:messageResponse" />
+        </wsdl20:operation>
+    </wsdl20:interface>
+    <wsdl20:binding name="TranslatorSoap12Binding" type="translator:TranslatorPortType">
         <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
-        <wsdl:operation name="translate">
+        <wsdl20:operation name="translate">
             <soap12:operation soapAction="translate" style="document" />
-            <wsdl:input>
+            <wsdl20:input>
                 <soap12:body use="literal" />
-            </wsdl:input>
-            <wsdl:output>
+            </wsdl20:input>
+            <wsdl20:output>
                 <soap12:body use="literal" />
-            </wsdl:output>
-        </wsdl:operation>
-    </wsdl:binding>
-</wsdl:definitions>
+            </wsdl20:output>
+        </wsdl20:operation>
+    </wsdl20:binding>
+</wsdl20:descriptions>
