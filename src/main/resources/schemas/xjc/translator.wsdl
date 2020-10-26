@@ -1,9 +1,9 @@
 <wsdl20:description xmlns:wsdl20="http://www.w3.org/ns/wsdl"
-                     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     xmlns:translator="http://translator/web/ws/schema"
-                     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-                     targetNamespace="http://translator/web/ws/schema">
+                    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    xmlns:translator="http://translator/web/ws/schema"
+                    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                    targetNamespace="http://translator/web/ws/schema">
     <wsdl20:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    targetNamespace="http://translator/web/ws/schema" elementFormDefault="qualified">
@@ -47,4 +47,9 @@
             </wsdl20:output>
         </wsdl20:operation>
     </wsdl20:binding>
+    <wsdl20:service name="ws" interface="TranslatorPortType">
+        <wsdl20:endpoint name="ServerSoap12" binding="translator:TranslatorSoap12Binding">
+            <soap12:address location="http://localhost:8080/ws" />
+        </wsdl20:endpoint>
+    </wsdl20:service>
 </wsdl20:description>

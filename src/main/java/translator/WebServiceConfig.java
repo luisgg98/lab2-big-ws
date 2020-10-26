@@ -5,9 +5,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+//import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.servlet.HttpServletBean;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.soap.SoapVersion;
+import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 /*que hago aqui con wsdl20?*/
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
@@ -31,6 +35,15 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     SimpleWsdl11Definition s = new SimpleWsdl11Definition();
     s.setWsdl(new ClassPathResource("schemas/xjc/translator.wsdl"));
     return s;
+  }
+
+  @Bean
+  public SaajSoapMessageFactory soapMessageFactory(){
+    SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
+    messageFactory.setSoapVersion(SoapVersion.SOAP_12);
+    System.out.println("soapMessageFactory" +messageFactory );
+
+    return messageFactory;
   }
 }
 

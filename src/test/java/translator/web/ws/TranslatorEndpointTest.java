@@ -15,6 +15,8 @@ import translator.Application;
 import translator.web.ws.schema.GetTranslationRequest;
 import translator.web.ws.schema.GetTranslationResponse;
 
+import javax.xml.ws.Response;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -64,6 +66,18 @@ public class TranslatorEndpointTest {
     assertThat(response, instanceOf(GetTranslationResponse.class));
     GetTranslationResponse translation = (GetTranslationResponse) response;
     assertThat(translation.getTranslation(), is("I don't know how to translate from en to es the text 'This is a test of translation service'"));
+  }
+
+  @Test
+  public void testSoap() {
+    GetTranslationRequest request = new GetTranslationRequest();
+    request.setLangFrom("en");
+    request.setLangTo("es");
+    request.setText("This is a test of translation service");
+    Object response = new WebServiceTemplate(marshaller).marshalSendAndReceive("http://localhost:"
+            + port + "/ws", request);
+    GetTranslationResponse translation = (GetTranslationResponse) response;
+    System.out.println(translation.getTranslation());
   }
 }
 
