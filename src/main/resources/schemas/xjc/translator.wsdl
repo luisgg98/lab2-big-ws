@@ -17,7 +17,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-
             <xs:element name="getTranslationResponse">
                 <xs:complexType>
                     <xs:sequence>
@@ -29,13 +28,13 @@
             </xs:element>
         </xs:schema>
     </wsdl20:types>
-    <wsdl20:interface name="TranslatorPortType">
+    <wsdl20:interface name="TranslatorInterface">
         <wsdl20:operation name="translate">
             <wsdl20:input element="translator:getTranslationRequest" />
             <wsdl20:output element="translator:getTranslationResponse" />
         </wsdl20:operation>
     </wsdl20:interface>
-    <wsdl20:binding name="TranslatorSoap12Binding" type="translator:TranslatorPortType">
+    <wsdl20:binding name="TranslatorSoap12Binding" type="translator:TranslatorInterface">
         <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
         <wsdl20:operation  ref="translate">
             <soap12:operation soapAction="translate" style="document" />
@@ -47,7 +46,7 @@
             </wsdl20:output>
         </wsdl20:operation>
     </wsdl20:binding>
-    <wsdl20:service name="ws" interface="TranslatorPortType">
+    <wsdl20:service name="ws" interface="TranslatorInterface">
         <wsdl20:endpoint name="ServerSoap12" binding="translator:TranslatorSoap12Binding">
             <soap12:address location="http://localhost:8080/ws" />
         </wsdl20:endpoint>
